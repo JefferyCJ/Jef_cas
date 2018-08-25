@@ -6,7 +6,11 @@
 
     <groupId>com.googlecode.ec</groupId>
     <artifactId>cas_easyec</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>sso_server</module>
+    </modules>
 
 
 </project>

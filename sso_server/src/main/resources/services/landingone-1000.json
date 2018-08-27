@@ -1,0 +1,9 @@
+{
+  "@class" : "org.apereo.cas.services.RegexRegisteredService",
+  "serviceId" : "^(https|imaps|http)://(localhost|192.168).*",
+  "name" : "Landing One",
+  "id" : 1000,
+  "description" : "landingone 项目访问过来，跳转到demo主题",
+  "evaluationOrder" : 10,
+  "theme": "landingone"
+}

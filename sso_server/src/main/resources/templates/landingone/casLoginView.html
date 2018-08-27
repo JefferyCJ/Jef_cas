@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<title th:text="${#themes.code('landingone.pageTitle')}"></title>
+	<link rel="stylesheet" th:href="@{${#themes.code('landingone.css.file')}}"/>
+	<script type="text/javascript" th:src="@{/themes/landingone/js/main.js}"></script>
+	<script type="text/javascript" th:src="@{/themes/landingone/js/landingone.js}"></script>
+	<script type="text/javascript" th:src="@{/themes/landingone/js/register.js}"></script>
+	<script type="text/javascript" th:src="@{/themes/landingone/scripts/jquery.min.js}"></script>
+	<script type="text/javascript" th:src="@{/themes/landingone/scripts/vendors/jquery.min-2.1.4.js}"></script>
+</head>
+
+<body>
+<h1 th:text="${#themes.code('landingone.pageTitle')}"></h1>
+<h2>landingone的登录模板</h2>
+<div>
+	<form method="post" th:object="${credential}">
+		<div id="info"></div>
+		<div id="errors" th:if="${#fields.hasErrors('*')}">
+			<span th:each="err : ${#fields.errors('*')}" th:utext="${err}"/>
+		</div>
+		<h2 th:utext="#{screen.welcome.instructions}"></h2>
+
+		<section class="row">
+			<label for="username" th:utext="#{screen.welcome.label.netid}"/>
+			<div th:unless="${openIdLocalId}">
+				<input class="required"
+				       id="username"
+				       size="25"
+				       tabindex="1"
+				       type="text"
+				       th:disabled="${guaEnabled}"
+				       th:field="*{username}"
+				       th:accesskey="#{screen.welcome.label.netid.accesskey}"
+				       autocomplete="off"
+				       onkeyup="hasVerify()"/>
+			</div>
+		</section>
+		<section class="row" id="passwordSection">
+			<label for="password" th:utext="#{screen.welcome.label.password}"/>
+			<div>
+				<input class="required"
+				       type="password"
+				       id="password"
+				       size="25"
+				       tabindex="2"
+				       th:accesskey="#{screen.welcome.label.password.accesskey}"
+				       th:field="*{password}"
+				       autocomplete="off"/>
+			</div>
+		</section>
+		<section class="row" id="verifySection" style="display: none">
+			<label for="verifycode" th:utext="#{screen.welcome.label.verifycode}"/>
+			<div>
+				<input class="required"
+				       id="verifycode"
+				       name="verifycode"
+				       size="25"
+				       tabindex="3"
+				       autocomplete="off"/>
+				<input class="required"
+				       id="verifytype"
+				       name="verifytype"
+				       th:value="LoginCode"
+				       type="hidden"/>
+
+				<input class="removeFocusIndicator" onclick="sendSmsCode()" id="smscode_btnPhone"
+				       th:value="#{screen.welcome.button.getverify}"
+				       type="button">
+				</input>
+			</div>
+		</section>
+		<section>
+			<input class="required"
+			       id="submittype"
+			       name="submittype"
+			       th:value="LoginView"
+			       type="hidden"/>
+			<input type="hidden" name="execution" th:value="${flowExecutionKey}"/>
+			<input type="hidden" name="_eventId" value="submit"/>
+			<input type="hidden" name="geolocation"/>
+			<input class="btn btn-submit btn-block"
+			       name="submit"
+			       id="btn_login"
+			       accesskey="l"
+			       th:value="#{screen.welcome.button.login}"
+			       tabindex="6"
+			       type="submit"/>
+			<a th:href="@{/register}">注册</a>
+
+			<a th:href="@{/forgetPassword}">忘记密码</a>
+			<a th:href="@{/wechatToLogin}">微信登录</a>
+
+
+		</section>
+	</form>
+</div>
+</body>
+</html>
